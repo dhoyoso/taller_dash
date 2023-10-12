@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import datetime as dt
 
-
+DATA_FILE = 'datos_energia.csv'
 
 app = dash.Dash(
     __name__,
@@ -21,8 +21,10 @@ app.config.suppress_callback_exceptions = True
 
 # Load data from csv
 def load_data():
-    # To do: Completar la función 
-    
+    data = pd.read_csv(DATA_FILE)
+    data['time'] = pd.to_datetime(data['time'])
+    data = data.set_index('time')
+    return data
 
 # Cargar datos
 data = load_data()
